@@ -1,0 +1,20 @@
+[project]
+name = "data-analyst-agent"
+version = "0.1.0"
+description = "Conversational data analyst over CSV files in Google Drive, with fixed analysis tools."
+requires-python = ">=3.12"
+dependencies = [
+    "mistralai-agents>=1.1.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.mistralai.agents]
+entrypoint = "main:agent"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
