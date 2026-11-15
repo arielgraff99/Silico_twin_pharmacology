@@ -82,9 +82,14 @@ it **hardened** by default; keep that (do not pass `--no-hardened`).
 
   async def main():
       agent = agents.Agent.load_from(agent_name="data-analyst")
-      async with await agent.create_session() as session:
-          print((await session.run_turn("Analyse https://drive.google.com/... my sales CSV")).text)
-          print((await session.run_turn("And per region?")).text)  # same session, same data
+      session = await agent.start_session()
+      try:
+          first = await session.run("Analyse https://drive.google.com/... my sales CSV")
+          print(first.text)
+          second = await session.run("And per region?")  # same session, same data
+          print(second.text)
+      finally:
+          await session.cancel()
 
   asyncio.run(main())
   ```
