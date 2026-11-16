@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pharmacology data form — data-analyst agent</title>
+<style>
+  :root { --accent:#fa520f; --bg:#faf9f7; --line:#e3ded7; --ink:#1f1d1a; }
+  * { box-sizing:border-box; }
+  body { font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--ink); margin:0; }
+  header { background:var(--accent); color:#fff; padding:18px 24px; }
+  header h1 { margin:0; font-size:20px; }
+  header p { margin:4px 0 0; opacity:.9; font-size:13px; }
+  main { max-width:880px; margin:24px auto; padding:0 16px; }
+  fieldset { border:1px solid var(--line); border-radius:10px; margin:0 0 18px; background:#fff; }
+  legend { font-weight:600; padding:0 8px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; padding:12px; }
+  label { display:flex; flex-direction:column; gap:4px; font-size:12.5px; font-weight:600; color:#57534e; }
+  input,select { padding:8px 10px; border:1px solid var(--line); border-radius:8px; font-size:14px; background:#fff; }
+  input:invalid { border-color:#fca5a5; }
+  .row { display:flex; gap:10px; align-items:end; flex-wrap:wrap; padding:12px; border-bottom:1px dashed var(--line); }
+  .row:last-child { border-bottom:none; }
+  .row .grid { flex:1; padding:0; }
+  button { background:var(--accent); color:#fff; border:none; border-radius:8px; padding:10px 18px; font-size:14px; font-weight:600; cursor:pointer; }
+  button.ghost { background:#fff; color:var(--accent); border:1px solid var(--accent); }
+  button.small { padding:6px 12px; font-size:12.5px; }
+  button:disabled { opacity:.5; cursor:default; }
+  .actions { display:flex; gap:10px; margin:6px 0 18px; }
+  #status { font-size:13px; margin-left:8px; color:#57534e; }
+  .error { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; border-radius:8px; padding:10px 14px; margin-bottom:14px; font-size:13.5px; white-space:pre-wrap; }
+  #chat { display:none; }
+  #log { border:1px solid var(--line); border-radius:10px; background:#fff; height:380px; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
+  .msg { max-width:85%; padding:9px 13px; border-radius:12px; font-size:14px; line-height:1.45; white-space:pre-wrap; }
+  .msg.user { align-self:flex-end; background:var(--accent); color:#fff; border-bottom-right-radius:3px; }
+  .msg.agent { align-self:flex-start; background:#f1efe9; border-bottom-left-radius:3px; }
+  .msg.agent.md code { background:#e7e2da; padding:1px 5px; border-radius:4px; font-size:13px; }
+  .chatbar { display:flex; gap:10px; margin-top:12px; }
+  .chatbar input { flex:1; }
+  details { margin-top:14px; font-size:12.5px; color:#57534e; }
+  pre { background:#f5f3ef; border:1px solid var(--line); border-radius:8px; padding:10px; overflow-x:auto; }
+  h2 { font-size:15px; margin:22px 0 8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Pharmacology data form</h1>
+  <p>Validated fields with pre-filled options — no CSV editing. Submits to your deployed <b>data-analyst</b> agent and lets you ask follow-ups in the same conversation.</p>
+</header>
+<main>
+  <div id="error" class="error" style="display:none"></div>
+
+  <form id="form">
+    <fieldset>
+      <legend>Patient</legend>
+      <div class="grid">
+        <label>Patient ID *<input name="patient_id" required placeholder="P-001"></label>
+        <label>Age (years) *<input name="age_years" type="number" min="0" max="120" step="1" required></label>
+        <label>Sex *<select name="sex"><option>female</option><option>male</option><option>other</option></select></label>
+        <label>Weight (kg) *<input name="weight_kg" type="number" min="0.5" max="350" step="0.1" required></label>
+        <label>Height (cm)<input name="height_cm" type="number" min="30" max="250" step="0.5"></label>
+        <label>eGFR (mL/min)<input name="renal_function_egfr" type="number" min="0" max="200" step="1"></label>
+        <label>Pregnant *<select name="pregnant"><option>unknown</option><option>yes</option><option>no</option></select></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Medications * <span style="font-weight:400;font-size:12px">— picking a drug pre-fills its typical dose; adjust freely</span></legend>
+      <div id="medrows"></div>
+      <div class="actions" style="padding:10px 12px">
+        <button type="button" class="ghost small" id="addmed">+ Add medication</button>
+        <input id="medquery" placeholder="Update list via web search, e.g. antihypertensives" style="flex:1;min-width:220px">
+        <button type="button" class="ghost small" id="medsearch">Search &amp; update list</button>
+      </div>
+      <div id="medstatus" style="padding:0 12px 10px;font-size:12.5px;color:#57534e"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Observation <span style="font-weight:400;font-size:12px">(optional — one sampling point)</span></legend>
+      <div class="grid">
+        <label>Sample time (h since first dose)<input name="sample_time_h" type="number" min="0" step="0.1"></label>
+        <label>Measured concentration<input name="measured_concentration" type="number" min="0" step="0.001"></label>
+        <label>Concentration unit<select name="concentration_unit"><option value=""></option><option>µg/L</option><option>mg/L</option><option>ng/mL</option></select></label>
+        <label>Adverse event<input name="adverse_event" placeholder="none"></label>
+        <label>Adherence (%)<input name="adherence_pct" type="number" min="0" max="100" step="1"></label>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <button type="submit" id="submit">Send to agent</button>
+      <span id="status"></span>
+    </div>
+    <details><summary>Show the CSV that will be sent</summary><pre id="csvpreview">(fill the form)</pre></details>
+  </form>
+
+  <section id="chat">
+    <h2>Conversation with the agent <button type="button" class="ghost small" id="newform" style="margin-left:8px">New form</button></h2>
+    <div id="log"></div>
+    <div class="chatbar">
+      <input id="q" placeholder="Ask a follow-up, e.g. “what is the total daily dose per drug?”" autocomplete="off">
+      <button id="send">Send</button>
+    </div>
+  </section>
+</main>
+
+<script>
+const MED_FIELDS = ["medication","dose","dose_unit","route","frequency","treatment_start","duration_days"];
+const FREQ = ["once daily","q4h","q6h","q8h","q12h","TID","BID","weekly","PRN"];
+const ROUTES = ["oral","IV","IM","SC","sublingual","transdermal","rectal","inhaled"];
+const UNITS = ["mg","µg","g","IU","mL","mg/kg","µg/h"];
+let MEDS = [];
+let sessionId = null;
+let busy = false;
+
+const $ = (s, el=document) => el.querySelector(s);
+const el = (tag, attrs={}, html="") => { const n=document.createElement(tag); for(const[k,v] of Object.entries(attrs)) n[k]=v; if(html) n.innerHTML=html; return n; };
+
+fetch("/medications.json").then(r=>r.json()).then(d=>{ MEDS=d.medications; addMedRow(); });
+
+function refreshMedOptions(){
+  for(const sel of document.querySelectorAll("select[name=medication]")){
+    const current = sel.value;
+    sel.innerHTML = "";
+    sel.append(el("option",{value:"",textContent:"— choose —"}));
+    for(const m of MEDS) sel.append(el("option",{value:m.name,textContent:m.name}));
+    if(current && MEDS.some(m=>m.name===current)) sel.value = current;
+  }
+}
+
+$("#medsearch").onclick = async () => {
+  const q = $("#medquery").value.trim();
+  const status = $("#medstatus");
+  if(q.length < 3){ status.textContent = "Type a search query first (min 3 characters)."; return; }
+  $("#medsearch").disabled = true;
+  status.textContent = "Searching the web via the agent API… (can take ~30 s)";
+  try{
+    const res = await fetch("/api/medications/update",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:q})});
+    const body = await res.json();
+    if(!res.ok) throw new Error(body.detail||res.statusText);
+    MEDS = body.medications;
+    refreshMedOptions();
+    const names = [...body.added, ...body.updated].map(m=>m.name).join(", ");
+    status.textContent = `Done: ${body.added.length} added, ${body.updated.length} updated, ${body.total} total.` + (names?" Changed: "+names:" No changes.");
+  }catch(e){ status.textContent = "Search failed: "+e.message; }
+  $("#medsearch").disabled = false;
+};
+
+function medSelect(){
+  const s = el("select", {name:"medication", required:true});
+  s.append(el("option",{value:"",textContent:"— choose —"}));
+  for(const m of MEDS) s.append(el("option",{value:m.name,textContent:m.name}));
+  return s;
+}
+
+function addMedRow(prefill){
+  const row = el("div",{className:"row"});
+  const grid = el("div",{className:"grid"});
+  const sel = medSelect();
+  const dose = el("input",{name:"dose",type:"number",min:"0.001",step:"0.001",required:true});
+  const unit = el("select",{name:"dose_unit"}); UNITS.forEach(u=>unit.append(el("option",{value:u,textContent:u})));
+  const route = el("select",{name:"route"}); ROUTES.forEach(r=>route.append(el("option",{value:r,textContent:r})));
+  const freq = el("select",{name:"frequency"}); FREQ.forEach(f=>freq.append(el("option",{value:f,textContent:f})));
+  const start = el("input",{name:"treatment_start",type:"date"});
+  const dur = el("input",{name:"duration_days",type:"number",min:"0",step:"0.5"});
+  sel.addEventListener("change",()=>{
+    const m = MEDS.find(x=>x.name===sel.value);
+    if(m){ dose.value=m.dose; unit.value=m.unit; route.value=m.route; freq.value=m.frequency; preview(); }
+  });
+  grid.append(
+    el("label",{textContent:"Medication *"}).appendChild(sel).parentNode,
+    el("label",{textContent:"Dose *"}).appendChild(dose).parentNode,
+    el("label",{textContent:"Unit"}).appendChild(unit).parentNode,
+    el("label",{textContent:"Route"}).appendChild(route).parentNode,
+    el("label",{textContent:"Frequency"}).appendChild(freq).parentNode,
+    el("label",{textContent:"Start"}).appendChild(start).parentNode,
+    el("label",{textContent:"Duration (days)"}).appendChild(dur).parentNode,
+  );
+  const del = el("button",{type:"button",className:"ghost small",textContent:"Remove"});
+  del.onclick=()=>{ row.remove(); if(!$("#medrows").children.length) addMedRow(); preview(); };
+  row.append(grid, del);
+  $("#medrows").append(row);
+  if(prefill){ sel.value=prefill.medication; dose.value=prefill.dose; unit.value=prefill.unit; route.value=prefill.route; freq.value=prefill.frequency; }
+  ["change","input"].forEach(ev=>row.addEventListener(ev,preview));
+  preview();
+}
+
+function collect(){
+  const f = $("#form");
+  const fd = new FormData(f);
+  const get = k => (fd.get(k)||"").toString().trim();
+  const num = k => get(k)===""?null:Number(get(k));
+  const meds = [...$("#medrows").children].map(row=>{
+    const rfd = new FormData();
+    [...row.querySelectorAll("input,select")].forEach(i=>{ if(i.name) rfd.append(i.name,i.value); });
+    const rget = k => (rfd.get(k)||"").toString().trim();
+    return {
+      medication:rget("medication"), dose:Number(rget("dose")), dose_unit:rget("dose_unit"),
+      route:rget("route"), frequency:rget("frequency"),
+      treatment_start:rget("treatment_start")||null,
+      duration_days:rget("duration_days")===""?null:Number(rget("duration_days")),
+    };
+  });
+  return {
+    patient_id:get("patient_id"), age_years:num("age_years"), sex:get("sex"),
+    weight_kg:num("weight_kg"), height_cm:num("height_cm"),
+    renal_function_egfr:num("renal_function_egfr"), pregnant:get("pregnant"),
+    medications:meds,
+    observation:(get("sample_time_h")||get("measured_concentration")||get("adverse_event")||get("adherence_pct"))?{
+      sample_time_h:num("sample_time_h"), measured_concentration:num("measured_concentration"),
+      concentration_unit:get("concentration_unit")||null, adverse_event:get("adverse_event")||null,
+      adherence_pct:num("adherence_pct"),
+    }:null,
+  };
+}
+
+function csvLocal(d){
+  const cols = ["patient_id","age_years","sex","weight_kg","height_cm","renal_function_egfr","pregnant","medication","dose","dose_unit","route","frequency","treatment_start","duration_days","sample_time_h","measured_concentration","concentration_unit","adverse_event","adherence_pct"];
+  const esc = v => v===null||v===undefined||v===""?"":String(v);
+  const lines = [cols.join(",")];
+  d.medications.forEach((m,i)=>{
+    const r = Object.fromEntries(cols.map(c=>[c,""]));
+    if(i===0) Object.assign(r,{patient_id:d.patient_id,age_years:d.age_years,sex:d.sex,weight_kg:d.weight_kg,height_cm:d.height_cm??"",renal_function_egfr:d.renal_function_egfr??"",pregnant:d.pregnant});
+    Object.assign(r,{medication:m.medication,dose:m.dose,dose_unit:m.dose_unit,route:m.route,frequency:m.frequency,treatment_start:m.treatment_start??"",duration_days:m.duration_days??""});
+    if(d.observation) Object.assign(r,{sample_time_h:d.observation.sample_time_h??"",measured_concentration:d.observation.measured_concentration??"",concentration_unit:d.observation.concentration_unit??"",adverse_event:d.observation.adverse_event??"",adherence_pct:d.observation.adherence_pct??""});
+    lines.push(cols.map(c=>r[c]).join(","));
+  });
+  return lines.join("\n");
+}
+
+function preview(){ try{ $("#csvpreview").textContent = csvLocal(collect()); }catch(e){} }
+
+function showError(msg){ const e=$("#error"); e.textContent=msg; e.style.display="block"; }
+function hideError(){ $("#error").style.display="none"; }
+function addMsg(cls,text){
+  const div = el("div",{className:"msg md "+cls});
+  div.innerHTML = text
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
+    .replace(/`([^`]+)`/g,"<code>$1</code>");
+  $("#log").append(div);
+  $("#log").scrollTop = $("#log").scrollHeight;
+}
+function setBusy(b){
+  busy=b; $("#submit").disabled=b; $("#send").disabled=b;
+  $("#status").textContent = b?"Working with the agent…":"";
+}
+
+$("#addmed").onclick=()=>addMedRow();
+$("#form").addEventListener("submit", async ev=>{
+  ev.preventDefault(); hideError();
+  if(busy) return;
+  let data;
+  try{ data = collect(); }
+  catch(e){ return showError("Form error: "+e.message); }
+  if(!data.patient_id) return showError("Patient ID is required.");
+  if(!data.medications.length || data.medications.some(m=>!m.medication || !(m.dose>0)))
+    return showError("Each medication needs a drug and a dose > 0.");
+  setBusy(true);
+  try{
+    const res = await fetch("/api/session",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+    const body = await res.json();
+    if(!res.ok) throw new Error(body.detail||res.statusText);
+    sessionId = body.session_id;
+    $("#form").style.display="none"; $("#chat").style.display="block";
+    addMsg("user","Form submitted — "+data.medications.length+" medication(s) for patient "+data.patient_id);
+    addMsg("agent",body.reply);
+  }catch(e){ showError("Failed: "+e.message); }
+  setBusy(false);
+});
+
+async function ask(text){
+  if(!sessionId || busy || !text.trim()) return;
+  hideError(); setBusy(true); addMsg("user",text.trim()); $("#q").value="";
+  try{
+    const res = await fetch(`/api/chat?session_id=${encodeURIComponent(sessionId)}&message=${encodeURIComponent(text.trim())}`,{method:"POST"});
+    const body = await res.json();
+    if(!res.ok) throw new Error(body.detail||res.statusText);
+    addMsg("agent",body.reply);
+  }catch(e){ showError("Failed: "+e.message); }
+  setBusy(false);
+}
+$("#send").onclick=()=>ask($("#q").value);
+$("#q").addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); ask($("#q").value);} });
+$("#newform").onclick=async()=>{
+  if(sessionId){ try{ await fetch(`/api/reset?session_id=${encodeURIComponent(sessionId)}`,{method:"POST"});}catch(e){} }
+  sessionId=null; $("#log").innerHTML=""; $("#chat").style.display="none"; $("#form").style.display="block"; hideError();
+};
+preview();
+</script>
+</body>
+</html>
