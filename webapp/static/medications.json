@@ -1,0 +1,894 @@
+{
+  "comment": "Curated subset of the WHO Essential Medicines list with typical ADULT maintenance doses. Pre-fill values only - always verify against the prescribing information. Doses are per administration unless noted.",
+  "medications": [
+    {
+      "name": "acarbose",
+      "dose": 100.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "TID"
+    },
+    {
+      "name": "Acetylsalicylic acid",
+      "dose": 100,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Adrenaline (epinephrine)",
+      "dose": 0.5,
+      "unit": "mg",
+      "route": "IM",
+      "frequency": "PRN"
+    },
+    {
+      "name": "Allopurinol",
+      "dose": 300,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Alprazolam",
+      "dose": 0.5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q8h"
+    },
+    {
+      "name": "Amiodarone",
+      "dose": 200,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Amitriptyline",
+      "dose": 25,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Amlodipine",
+      "dose": 5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Amoxicillin",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q8h"
+    },
+    {
+      "name": "Amoxicillin/Clavulanate",
+      "dose": 875,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Atorvastatin",
+      "dose": 20,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Azithromycin",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Beclometasone inhaler",
+      "dose": 100,
+      "unit": "µg",
+      "route": "inhaled",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Bisoprolol",
+      "dose": 5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Budesonide/Formoterol",
+      "dose": 200,
+      "unit": "µg",
+      "route": "inhaled",
+      "frequency": "q12h"
+    },
+    {
+      "name": "canagliflozin",
+      "dose": 100.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Captopril",
+      "dose": 25,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Carbamazepine",
+      "dose": 200,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Carbimazole",
+      "dose": 15,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Ceftriaxone",
+      "dose": 1000,
+      "unit": "mg",
+      "route": "IV",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Celecoxib",
+      "dose": 200,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Cephalexin",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q6h"
+    },
+    {
+      "name": "Cetirizine",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Ciclosporin",
+      "dose": 100,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Ciprofloxacin",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Clarithromycin",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Clindamycin",
+      "dose": 300,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q6h"
+    },
+    {
+      "name": "Clopidogrel",
+      "dose": 75,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Codeine",
+      "dose": 30,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q6h"
+    },
+    {
+      "name": "dapagliflozin",
+      "dose": 10.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Dexamethasone",
+      "dose": 4,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Diazepam",
+      "dose": 5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Diclofenac",
+      "dose": 50,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q8h"
+    },
+    {
+      "name": "Digoxin",
+      "dose": 0.125,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Doxycycline",
+      "dose": 100,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "dulaglutide",
+      "dose": 1.5,
+      "unit": "mg",
+      "route": "SC",
+      "frequency": "weekly"
+    },
+    {
+      "name": "empagliflozin",
+      "dose": 10.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Enalapril",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Enoxaparin",
+      "dose": 40,
+      "unit": "mg",
+      "route": "SC",
+      "frequency": "once daily"
+    },
+    {
+      "name": "exenatide (short-acting)",
+      "dose": 10.0,
+      "unit": "µg",
+      "route": "SC",
+      "frequency": "BID"
+    },
+    {
+      "name": "Fentanyl patch",
+      "dose": 25,
+      "unit": "µg/h",
+      "route": "transdermal",
+      "frequency": "weekly"
+    },
+    {
+      "name": "Ferrous sulfate",
+      "dose": 200,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Fluoxetine",
+      "dose": 20,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Folic acid",
+      "dose": 5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Furosemide",
+      "dose": 40,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Gentamicin",
+      "dose": 5,
+      "unit": "mg/kg",
+      "route": "IV",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Glibenclamide",
+      "dose": 5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "glibenclamide (glyburide)",
+      "dose": 5.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Gliclazide",
+      "dose": 80,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "gliclazide (modified-release)",
+      "dose": 60.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "glimepiride",
+      "dose": 4.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "glipizide",
+      "dose": 10.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Haloperidol",
+      "dose": 2,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Heparin",
+      "dose": 5000,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "q8h"
+    },
+    {
+      "name": "Hydrochlorothiazide",
+      "dose": 25,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Hydroxychloroquine",
+      "dose": 200,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Ibuprofen",
+      "dose": 400,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q8h"
+    },
+    {
+      "name": "insulin degludec",
+      "dose": 10.0,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Insulin glargine",
+      "dose": 10,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "once daily"
+    },
+    {
+      "name": "insulin glargine (U-100)",
+      "dose": 10.0,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "once daily"
+    },
+    {
+      "name": "insulin human soluble (regular)",
+      "dose": 6.0,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "TID"
+    },
+    {
+      "name": "insulin isophane (NPH, human)",
+      "dose": 10.0,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "BID"
+    },
+    {
+      "name": "insulin lispro (rapid-acting)",
+      "dose": 4.0,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "TID"
+    },
+    {
+      "name": "Insulin regular",
+      "dose": 6,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "TID"
+    },
+    {
+      "name": "Ipratropium",
+      "dose": 40,
+      "unit": "µg",
+      "route": "inhaled",
+      "frequency": "q6h"
+    },
+    {
+      "name": "Isosorbide dinitrate",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Levetiracetam",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Levothyroxine",
+      "dose": 75,
+      "unit": "µg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "linagliptin",
+      "dose": 5.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "liraglutide",
+      "dose": 1.8,
+      "unit": "mg",
+      "route": "SC",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Lisinopril",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Lithium carbonate",
+      "dose": 400,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "lixisenatide",
+      "dose": 20.0,
+      "unit": "µg",
+      "route": "SC",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Loperamide",
+      "dose": 2,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "PRN"
+    },
+    {
+      "name": "Loratadine",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Lorazepam",
+      "dose": 1,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Losartan",
+      "dose": 50,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Meropenem",
+      "dose": 1000,
+      "unit": "mg",
+      "route": "IV",
+      "frequency": "q8h"
+    },
+    {
+      "name": "Metformin",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "metformin (immediate-release)",
+      "dose": 1000.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "BID"
+    },
+    {
+      "name": "metformin (modified/extended-release)",
+      "dose": 1000.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Methotrexate",
+      "dose": 15,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "weekly"
+    },
+    {
+      "name": "Metoclopramide",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q8h"
+    },
+    {
+      "name": "Metoprolol",
+      "dose": 50,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Metronidazole",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q8h"
+    },
+    {
+      "name": "Montelukast",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Morphine",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q4h"
+    },
+    {
+      "name": "Morphine IV",
+      "dose": 5,
+      "unit": "mg",
+      "route": "IV",
+      "frequency": "q4h"
+    },
+    {
+      "name": "Naproxen",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Nifedipine",
+      "dose": 30,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Nitrofurantoin",
+      "dose": 100,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Nitroglycerin",
+      "dose": 0.5,
+      "unit": "mg",
+      "route": "sublingual",
+      "frequency": "PRN"
+    },
+    {
+      "name": "Olanzapine",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Omeprazole",
+      "dose": 20,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Ondansetron",
+      "dose": 8,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Pantoprazole",
+      "dose": 40,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Paracetamol",
+      "dose": 1000,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q6h"
+    },
+    {
+      "name": "Phenytoin",
+      "dose": 300,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "pioglitazone",
+      "dose": 30.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Potassium chloride",
+      "dose": 600,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Prednisolone",
+      "dose": 20,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Prednisone",
+      "dose": 30,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "premixed human insulin 70/30 (NPH/regular)",
+      "dose": 10.0,
+      "unit": "IU",
+      "route": "SC",
+      "frequency": "BID"
+    },
+    {
+      "name": "Ramipril",
+      "dose": 5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Ranitidine",
+      "dose": 150,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "repaglinide",
+      "dose": 4.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "TID"
+    },
+    {
+      "name": "Risperidone",
+      "dose": 2,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Salbutamol inhaler",
+      "dose": 100,
+      "unit": "µg",
+      "route": "inhaled",
+      "frequency": "PRN"
+    },
+    {
+      "name": "saxagliptin",
+      "dose": 5.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "semaglutide (injection)",
+      "dose": 1.0,
+      "unit": "mg",
+      "route": "SC",
+      "frequency": "weekly"
+    },
+    {
+      "name": "semaglutide (oral)",
+      "dose": 14.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Sertraline",
+      "dose": 50,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Simvastatin",
+      "dose": 20,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "sitagliptin",
+      "dose": 100.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Spironolactone",
+      "dose": 25,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Tacrolimus",
+      "dose": 5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Tamoxifen",
+      "dose": 20,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "tirzepatide",
+      "dose": 5.0,
+      "unit": "mg",
+      "route": "SC",
+      "frequency": "weekly"
+    },
+    {
+      "name": "Tramadol",
+      "dose": 50,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q6h"
+    },
+    {
+      "name": "Trimethoprim/Sulfamethoxazole",
+      "dose": 160,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Valproate",
+      "dose": 500,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "q12h"
+    },
+    {
+      "name": "Valsartan",
+      "dose": 80,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Vancomycin",
+      "dose": 15,
+      "unit": "mg/kg",
+      "route": "IV",
+      "frequency": "q12h"
+    },
+    {
+      "name": "vildagliptin",
+      "dose": 50.0,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "BID"
+    },
+    {
+      "name": "Vitamin D",
+      "dose": 1000,
+      "unit": "IU",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Warfarin",
+      "dose": 5,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "once daily"
+    },
+    {
+      "name": "Zolpidem",
+      "dose": 10,
+      "unit": "mg",
+      "route": "oral",
+      "frequency": "PRN"
+    }
+  ]
+}

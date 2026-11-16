@@ -97,6 +97,36 @@ it **hardened** by default; keep that (do not pass `--no-hardened`).
 Sessions, traces (one span per model call and tool call) and logs are visible in
 Mistral Studio; read logs with `uv run --env-file .env agents logs data-analyst --follow`.
 
+## Local web form (no CSV editing)
+
+Instead of hand-writing CSV files, run the local form app and fill validated
+fields with pre-filled options:
+
+```bash
+uv run --extra webapp --env-file .env uvicorn webapp.server:app --port 8000
+# then open http://127.0.0.1:8000
+```
+
+- **Patient**: ID, age, sex, weight, height, eGFR, pregnancy — all validated.
+- **Medications**: one row per drug; picking a medication pre-fills its typical
+  dose, unit, route and frequency (curated WHO Essential Medicines subset in
+  `webapp/static/medications.json`, 120+ drugs).
+- **Update the list via web search**: type a query (e.g. `antihypertensives`)
+  and click *Search & update list*. The server calls Mistral with the hosted
+  `web_search` tool, extracts medications with typical adult doses as JSON,
+  and merges them into `medications.json` (deduplicated, backup written to
+  `medications.json.bak`). The dropdowns refresh in place.
+- **Observation**: one sampling point (time, concentration, unit, adverse
+  event, adherence) — optional.
+- On submit, the form data is serialized into a clean CSV (shown as a preview
+  before sending) and sent to the deployed `data-analyst` agent, which loads it
+  with its fixed tools. Follow-up questions go to the same conversation, so the
+  agent keeps the full context.
+
+The Mistral API key is read from the environment (`.env`) server-side and is
+never exposed to the browser. The app only talks to the *deployed* agent; the
+agent itself does not need to be redeployed.
+
 ## Notes and limits
 
 - The CSV text travels through the Drive connector's read tool into the model
